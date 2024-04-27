@@ -18,9 +18,9 @@ Topological consistency plays a crucial role in the task of boundary segmentatio
 gala is installed according to https://github.com/janelia-flyem/gala.
 
 # Prepare datasets and running
-SNEMI3D can be download from https://zenodo.org/record/7142003, should be placed in ./data/snemi3d/.
-IRON can be download from https://github.com/Keep-Passion/pure_iron_grain_data_sets, should be placed in ./data/iron/.
-MASS ROAD can be download from https://www.kaggle.com/datasets/balraj98/massachusetts-roads-dataset, should be placed in ./data/mass_road/. 
+SNEMI3D can be download from https://zenodo.org/record/7142003, and it should be placed in ./data/snemi3d/.  <br>
+IRON can be download from https://github.com/Keep-Passion/pure_iron_grain_data_sets, and it should be placed in ./data/iron/.  <br>
+MASS ROAD can be download from https://www.kaggle.com/datasets/balraj98/massachusetts-roads-dataset, and it should be placed in ./data/mass_road/.  <br>
 
 Usage Demo:
 
