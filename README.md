@@ -41,7 +41,7 @@ Usage Demo:
 
 ## Visualization
 
-The example results of WPU-Net algorithm is shown as follows: 
+The example results are shown as follows: 
 
 <p align = "center">
 <img src="https://github.com/clovermini/Skea_topo/blob/main/images/snemi3d.png">
