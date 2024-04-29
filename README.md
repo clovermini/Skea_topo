@@ -43,15 +43,15 @@ Usage Demo:
 
 The example results are shown as follows: 
 
-<p align = "center">
+<div align = "center">
 <img src="https://github.com/clovermini/Skea_topo/blob/main/images/snemi3d.png" style="zoom:30%">
-</p>
-<p align = "center">
+</div>
+<div align = "center">
 <img src="https://github.com/clovermini/Skea_topo/blob/main/images/iron.png" style="zoom:70%">
-</p>
-<p align = "center">
+</div>
+<div align = "center">
 <img src="https://github.com/clovermini/Skea_topo/blob/main/images/mass_road.png" style="zoom:70%">
-</p>
+</div>
 
 ## Citation
 If you find YOLO-World is useful in your research or applications, please consider giving us a star 🌟 and citing it.
