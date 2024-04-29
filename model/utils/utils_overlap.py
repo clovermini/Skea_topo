@@ -2,6 +2,7 @@ import math
 import numpy as np
 from typing import Callable, Iterable, List, Set, Tuple, Dict
 
+
 class OverlapTile:
     """
         This stategy is implementated from: Ma B, Ban X, Huang H, et al. Deep learning-based image segmentation

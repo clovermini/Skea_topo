@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 
 
-# show mid results
+# show middle results
 def show(pred_ori, mask_ori, tfn, ffn, tfp, ffp):
     pred = pred_ori
     mask = mask_ori
@@ -43,6 +43,7 @@ def show(pred_ori, mask_ori, tfn, ffn, tfp, ffp):
     plt.subplot(2,4,8), plt.imshow(pred+ffp, cmap=scmap2), plt.axis("off"), plt.title('FFP', fontsize=24) 
           
     plt.show()
+
 
 def soft_dilate(img):
     if len(img.shape)==4:
@@ -194,7 +195,6 @@ class WeightMapBortLoss(nn.Module):
         epoch: current epoch
         d_iter: dilation iters
         """
-        class_num = weight_maps.size()[1]
         mask = target.float()
         logit = torch.softmax(pred, dim=1)
         label_back_skelen = label_skelen[:, 0, :, :]

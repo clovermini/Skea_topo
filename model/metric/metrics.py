@@ -88,6 +88,7 @@ def compute_bettis_own(pred, label, filter_small_holes=False):
     betti1_error = abs(label_betti1-pred_betti1)
     return betti0_error+betti1_error, betti0_error, betti1_error
 
+
 def map_2018kdsb(pred: np.ndarray, mask: np.ndarray, bg_value = 1) -> float:
     """
     he metric is referenced from 2018 kaggle data science bowl: 
@@ -154,8 +155,8 @@ def cluster_metrics(pred: np.ndarray, mask: np.ndarray, bg_value = 1) -> Tuple:
         pred = pred / 255
         mask = mask / 255
     
-    label_pred, num_pred = label(pred, connectivity=1, background=bg_value, return_num=True)
-    label_mask, num_mask = label(mask, connectivity=1, background=bg_value, return_num=True)
+    label_pred, _ = label(pred, connectivity=1, background=bg_value, return_num=True)
+    label_mask, _ = label(mask, connectivity=1, background=bg_value, return_num=True)
 
     # false merges(缺失 ), false splits（划痕）
     merger_error, split_error = metrics.variation_of_information(label_pred, label_mask)
@@ -172,8 +173,8 @@ def ari(in_pred: np.ndarray, in_mask: np.ndarray, bg_value = 1) -> float:
         pred = pred / 255
         mask = mask / 255
     
-    label_pred, num_pred = label(pred, connectivity=1, background=bg_value, return_num=True)
-    label_mask, num_mask = label(mask, connectivity=1, background=bg_value, return_num=True)    
+    label_pred, _ = label(pred, connectivity=1, background=bg_value, return_num=True)
+    label_mask, _ = label(mask, connectivity=1, background=bg_value, return_num=True)    
     adjust_RI = ev.adj_rand_index(label_pred, label_mask)
     return adjust_RI
 
@@ -187,8 +188,8 @@ def vi(in_pred: np.ndarray, in_mask: np.ndarray, bg_value = 0) -> Tuple:
         pred = pred / 255
         mask = mask / 255
     
-    label_pred, num_pred = label(pred, connectivity=1, background=bg_value, return_num=True)
-    label_mask, num_mask = label(mask, connectivity=1, background=bg_value, return_num=True)
+    label_pred, _ = label(pred, connectivity=1, background=bg_value, return_num=True)
+    label_mask, _ = label(mask, connectivity=1, background=bg_value, return_num=True)
 
     ## gala
     merger_error, split_error = ev.split_vi(label_pred, label_mask)
@@ -214,8 +215,8 @@ def cd(in_pred: np.ndarray, in_mask: np.ndarray, return_absolute = True, bg_valu
         pred = pred / 255
         mask = mask / 255
     
-    label_pred, num_pred = label(pred, connectivity=1, background=bg_value, return_num=True)
-    label_mask, num_mask = label(mask, connectivity=1, background=bg_value, return_num=True)
+    _, num_pred = label(pred, connectivity=1, background=bg_value, return_num=True)
+    _, num_mask = label(mask, connectivity=1, background=bg_value, return_num=True)
     
     cd_value = num_mask - num_pred
     if return_absolute:
