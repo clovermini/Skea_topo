@@ -44,7 +44,7 @@ Usage Demo:
 The example results are shown as follows: 
 
 <div align = "center">
-<img src="https://github.com/clovermini/Skea_topo/blob/main/images/snemi3d.png" width="200" height="200">
+<img src="https://github.com/clovermini/Skea_topo/blob/main/images/snemi3d.png" width="800" height="300">
 </div>
 <div align = "center">
 <img src="https://github.com/clovermini/Skea_topo/blob/main/images/iron.png" style="zoom:70%">
