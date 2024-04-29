@@ -47,10 +47,10 @@ The example results are shown as follows:
 <img src="https://github.com/clovermini/Skea_topo/blob/main/images/snemi3d.png" width="800">
 </div>
 <div align = "center">
-<img src="https://github.com/clovermini/Skea_topo/blob/main/images/iron.png" style="zoom:70%">
+<img src="https://github.com/clovermini/Skea_topo/blob/main/images/iron.png" width="800">
 </div>
 <div align = "center">
-<img src="https://github.com/clovermini/Skea_topo/blob/main/images/mass_road.png" style="zoom:70%">
+<img src="https://github.com/clovermini/Skea_topo/blob/main/images/mass_road.png" width="800">
 </div>
 
 ## Citation
