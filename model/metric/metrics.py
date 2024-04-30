@@ -179,7 +179,7 @@ def ari(in_pred: np.ndarray, in_mask: np.ndarray, bg_value = 1) -> float:
     return adjust_RI
 
 
-def vi(in_pred: np.ndarray, in_mask: np.ndarray, bg_value = 0) -> Tuple:
+def vi(in_pred: np.ndarray, in_mask: np.ndarray, bg_value = 1) -> Tuple:
 
     vi, merger_error, split_error = 0.0, 0.0, 0.0
     pred = in_pred.copy()
@@ -199,7 +199,7 @@ def vi(in_pred: np.ndarray, in_mask: np.ndarray, bg_value = 0) -> Tuple:
     return vi, merger_error, split_error
 
 
-def cd(in_pred: np.ndarray, in_mask: np.ndarray, return_absolute = True, bg_value = 0) -> int:
+def cd(in_pred: np.ndarray, in_mask: np.ndarray, return_absolute = True, bg_value = 1) -> int:
     """
     cardinality difference
     
@@ -253,9 +253,9 @@ def post_process_label(in_img: np.ndarray, prun=False) -> np.ndarray:
 
 
 def post_process_output(in_img: np.ndarray, prun=False) -> np.ndarray:
-    out_img = morphology.dilation(in_img, morphology.square(2))  # 2  3
+    out_img = morphology.dilation(in_img, morphology.square(3))  # 2  3
     out_img = morphology.skeletonize(out_img, method="lee")
-    out_img = morphology.dilation(out_img, morphology.square(5))  # 5  3
+    out_img = morphology.dilation(out_img, morphology.square(3))  # 5  3
     if prun:
         out_img = prun(out_img, 4)  # 5
     return out_img

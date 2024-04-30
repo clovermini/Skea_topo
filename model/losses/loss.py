@@ -217,16 +217,16 @@ class WeightMapBortLoss(nn.Module):
             if 'bort' in method:
                 bort_weight_sum = 0.0
                 if '_fnw' in method:
-                    fn_prob = tp*(1-logit[:, 0, :, :])+class_weight[:, 0, :].unsqueeze(-1)*(tfn*(1-logit[:, 0, :, :])) + ffn*(logit[:, 0, :, :])
-                    bort_weight_sum += (tp.sum() + (class_weight[:,0,:].unsqueeze(-1) *tfn).sum() + ffn.sum())
+                    fn_prob = tp*(1-logit[:, 1, :, :])+class_weight[:, 1, :].unsqueeze(-1)*(tfn*(1-logit[:, 1, :, :])) + ffn*(logit[:, 1, :, :])
+                    bort_weight_sum += (tp.sum() + (class_weight[:,1,:].unsqueeze(-1) *tfn).sum() + ffn.sum())
                 else:
-                    fn_prob = tp*(1-logit[:, 0, :, :])+tfn*(1-logit[:, 0, :, :])  + ffn*(logit[:, 0, :, :])
+                    fn_prob = tp*(1-logit[:, 1, :, :])+tfn*(1-logit[:, 1, :, :])  + ffn*(logit[:, 1, :, :])
                     bort_weight_sum += ((tp+tfn+ffn).sum())
                 if '_fpw' in method:
-                    fp_prob = tn*(1-logit[:, 1, :, :])+class_weight[:, 0, :].unsqueeze(-1)*tfp*(1-logit[:, 1, :, :]) + ffp*(logit[:, 1, :, :])
-                    bort_weight_sum += (tn.sum() + (class_weight[:, 0, :].unsqueeze(-1)*tfp).sum()+ffp.sum())
+                    fp_prob = tn*(1-logit[:, 0, :, :])+class_weight[:, 1, :].unsqueeze(-1)*tfp*(1-logit[:, 0, :, :]) + ffp*(logit[:, 0, :, :])
+                    bort_weight_sum += (tn.sum() + (class_weight[:, 1, :].unsqueeze(-1)*tfp).sum()+ffp.sum())
                 else:
-                    fp_prob = tn*(1-logit[:, 1, :, :])+tfp*(1-logit[:, 1, :, :]) + ffp*(logit[:, 1, :, :])
+                    fp_prob = tn*(1-logit[:, 0, :, :])+tfp*(1-logit[:, 0, :, :]) + ffp*(logit[:, 0, :, :])
                     bort_weight_sum += ((tn+tfp+ffp).sum())
 
         loss = 0
@@ -243,7 +243,7 @@ class WeightMapBortLoss(nn.Module):
             wc = class_weight[:, idx, :].unsqueeze(-1)
             w0 = self.w0
                 
-            this_weight = weight_maps[:, idx, :, :]
+            this_weight = weight_maps[:, idx, :, :] 
       
             weight_map = w0 * this_weight + wc * mask[:, 0, :, :]   # formula(3) & (4) in paper
                 
