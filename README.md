@@ -1,5 +1,5 @@
 # Skea_topo
-The PyTorch implementation of the skea-topo aware loss proposed in paper: Enhancing Boundary Segmentation for Topological Accuracy with Skeleton-based Methods. <br>
+The PyTorch implementation of the skea-topo aware loss proposed in paper: [Enhancing Boundary Segmentation for Topological Accuracy with Skeleton-based Methods](https://arxiv.org/pdf/2404.18539). <br>
 This paper have been accepted by IJCAI2024. <br>
 
 ## Abstract
@@ -55,7 +55,14 @@ The example results are shown as follows:
 
 ## Citation
 If you find YOLO-World is useful in your research or applications, please consider giving us a star 🌟 and citing it.
-    Coming soon.
+    @misc{liu2024enhancing,
+      title={Enhancing Boundary Segmentation for Topological Accuracy with Skeleton-based Methods}, 
+      author={Chuni Liu and Boyuan Ma and Xiaojuan Ban and Yujie Xie and Hao Wang and Weihua Xue and Jingchao Ma and Ke Xu},
+      year={2024},
+      eprint={2404.18539},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
 
 
 
