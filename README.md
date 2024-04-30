@@ -63,7 +63,7 @@ If you find YOLO-World is useful in your research or applications, please consid
       eprint={2404.18539},
       archivePrefix={arXiv},
       primaryClass={cs.CV}
-}
+    }
 
 
 
