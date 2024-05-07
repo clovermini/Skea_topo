@@ -54,7 +54,7 @@ The example results are shown as follows:
 </div>
 
 ## Citation
-If you find YOLO-World is useful in your research or applications, please consider giving us a star 🌟 and citing it.
+If you find our work is useful in your research or applications, please consider giving us a star 🌟 and citing it.
 
     @misc{liu2024enhancing,
       title={Enhancing Boundary Segmentation for Topological Accuracy with Skeleton-based Methods}, 
