@@ -27,10 +27,10 @@ Usage Demo:
     # prepare datasets and calculate mean and std for each datasets
     python ./data/data_generator.py
     
-    # generate skelenton aware weighted map:
+    # generate skeleton aware weighted map:
     python ./data/skeleton_aware_loss_gen.py
 
-    # generate foreground and background skelentons for labels
+    # generate foreground and background skeletons for labels
     python ./data/skeleton_gen.py
 
     # train
