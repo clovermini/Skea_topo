@@ -39,10 +39,12 @@ Usage Demo:
     # eval 
     run eval.ipynb
 
-## Visualization
+## Results
 
 The example results are shown as follows: 
-
+<div align = "center">
+<img src="https://github.com/clovermini/Skea_topo/blob/main/images/results.png" width="800">
+</div>
 <div align = "center">
 <img src="https://github.com/clovermini/Skea_topo/blob/main/images/snemi3d.png" width="800">
 </div>
