@@ -35,6 +35,9 @@ Usage Demo:
     # generate skeleton aware weighted map:
     python ./data/skeleton_aware_loss_gen.py
 
+    # skeleton aware weighted map for DRIVE:
+    python ./data/skeleton_aware_loss_gen_single_object.py
+
     # generate foreground and background skeletons for labels
     python ./data/skeleton_gen.py
 
