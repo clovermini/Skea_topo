@@ -64,17 +64,7 @@ class SkeletonAwareWeight():
                 if single_border:
                     temp_weight = 1.0
                 else:
-                    label_map, label_num = measure.label(temp_mask, connectivity=1, background=1, return_num=True)
-                    temp_weight = self._get_border_weight(class_weight[class_idx, 0], temp_mask, dis_trf, label_map, label_num)
-                    ''' # speed up
-                    crop_images = self.overlap_tile.crop(temp_mask)
-                    temp = []
-                    for crop_mask in crop_images:
-                        label_map, label_num = measure.label(crop_mask, connectivity=1, background=1, return_num=True)
-                        temp_weight = self._get_border_weight(class_weight[class_idx, 0], crop_mask, dis_trf, label_map, label_num)
-                        temp.append(temp_weight)
-                    temp_weight = self.overlap_tile.stitch(temp)
-                    '''
+                    temp_weight = self._get_border_weight(class_weight[class_idx, 0], temp_mask, dis_trf)
             else:
                 # Get weight for objects
                 label_map, label_num = measure.label(temp_mask, connectivity=1, background=0, return_num=True)
@@ -84,39 +74,27 @@ class SkeletonAwareWeight():
             weight[:, :, class_idx] = temp_weight * temp_mask
         return weight
     
-    def _get_border_weight(self, wc: float, mask: np.ndarray, dis_trf: np.ndarray, label_map: np.ndarray, label_num: int) -> np.ndarray:
+    def _get_border_weight(self, wc: float, mask: np.ndarray, dis_trf: np.ndarray) -> np.ndarray:
         """
-        Get border weight
+        Get border weight for single connected object
         :param wc: class weight of border channel
         :param mask: real mask with shape (H,W), the border pixels equal 1 and the object pixels equal 0
         :param dis_trf: distance transform of border (shape (H,W)), it means the distance of each border pixel to the nearest object
-        :param label_map: label map of connected components with shape (H, W)
-        :param label_num: the number of connected components
         :return weight:  weight map of border with shape (H, W)        
         """
-        weight = np.zeros(label_map.shape)
-        image_props = measure.regionprops(label_map, cache=False)
-        h, w = mask.shape[:2]
-        min_dis = np.ones((h, w, label_num))
-        
-        # For each connected region, calculate the closest distance from other pixels to this region.
-        for label_idx in range(label_num): 
-            image_prop = image_props[label_idx]
-            (min_row, min_col, max_row, max_col) = image_prop.bbox
-            bool_sub = np.zeros(image_prop.image.shape)
-            bool_sub[image_prop.image] = 1.0
-            # mask this connected region by set its value to 0 
-            mask_label = np.ones_like(mask)
-            mask_label[min_row: max_row, min_col: max_col] -= bool_sub
-            # Get the distance transform to masked connect component
-            min_dis[:,:,label_idx] = ndimage.distance_transform_edt(mask_label) * mask
 
-        # Calculate for each pixel the distances to the first nearest(d1) and second nearest(d2) connected regions
-        min_dis.sort(axis=2)
-        min_dis = min_dis[:, :, 0:2]
-        # Calculate weight map by d1 and d2 for each pixel
-        max_dis_trf = np.amax(dis_trf)
-        weight =  1.0 + ((2 * max_dis_trf - min_dis[:, :, 0] - min_dis[:, :, 1] + self._eps) / (2 * max_dis_trf + self._eps))
+        sk = morphology.skeletonize(mask, method="lee") / 255  # Lee Skeleton method
+        dis_trf_sk = dis_trf * sk   # Get the distance transform of skeleton pixel
+
+        # Get the distance transform to skeleton pixel
+        indices = np.zeros(((np.ndim(sk),) + sk.shape), dtype=np.int32)
+        dis_trf_to_sk = ndimage.distance_transform_edt(1 - sk, return_indices=True, indices=indices)
+
+        dis_sk_map = dis_trf_sk[indices[0, :, :], indices[1, :, :]] * mask
+
+        max_dis_trf = np.amax(dis_trf_sk)  # min_dis[i, j, 0] == dis_trf
+
+        weight = 2.0 - ((dis_sk_map + + self._eps) / (max_dis_trf + self._eps))
 
         weight[weight < 0] = 0.0
         return weight
@@ -168,7 +146,7 @@ class SkeletonAwareWeight():
 
 
 if __name__ == "__main__":
-    data_dirs = ['snemi3d/', 'iron/', 'mass_road/train_', 'mass_road/val_']  # noqa
+    data_dirs = ['DRIVE/']  # noqa
     weight_fuc = SkeletonAwareWeight()
     st = time.time()
     
@@ -178,7 +156,7 @@ if __name__ == "__main__":
         print('start to handle .. ', data_dir, ' -- ', len(label_paths))
         cnt = 0
         for i, lbp in enumerate(label_paths):
-            if lbp.split('.')[-1] in ['png', 'tif']:
+            if lbp.split('.')[-1] in ['png', 'tif', 'gif']:
                 lbp_name = lbp.split('.')[0].strip()
                 lbp = os.path.join(data_dir, lbp)
                 print('start to handle pic ', lbp, ' -- ', lbp_name)
@@ -191,6 +169,9 @@ if __name__ == "__main__":
                     single_border = True   # evenly placed objects
                 if 'snemi3d' in data or 'iron' in data:
                     img = 1-img   # If the foreground pixels in the image are 0, then the pixels need to be inverted.
+                if 'DRIVE' in data:
+                    img = 1.0 - morphology.dilation(img, morphology.square(2))
+
                 weight = weight_fuc._get_weight(img, single_border=single_border)
                 print(i, ' costs ', time.time() - st)
                 print('weight 0 --> min ', np.amin(weight[:,:,0]), ' max: ', np.amax(weight[:, :, 0]))
