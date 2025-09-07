@@ -1,11 +1,26 @@
 # Skea_topo
 The PyTorch implementation of the skea-topo aware loss proposed in paper: [Enhancing Boundary Segmentation for Topological Accuracy with Skeleton-based Methods](https://arxiv.org/pdf/2404.18539). <br>
-This paper have been accepted by IJCAI2024. We are currently adapting our conference paper for journal submission, incorporating significant extensions and improvements.<br>
+- ✅ First published at **IJCAI 2024**  
+- 📌 Extended and **accepted in *Pattern Recognition***  
+- 📖 [Journal Version (Pattern Recognition)](https://www.sciencedirect.com/science/article/pii/S0031320325009264)  
 
-1. *Extended to more datasets and scenarios*: Specifically, we expanded our experiments to the DRIVE dataset, where the background typically consists of a single connected object, and adapted the Skeaw weight map calculation method to this scenario. Additionally, we extended our approach to a newly collected dataset (*Al-La MicroData*) for aluminum-lanthanum dendrite microstructure segmentation. This dataset, now publicly available, comprises 50 microscopic slices, each with a resolution of 1024 × 1024 pixels. The primary objects of interest are large dendrites, while the background includes the white base and smaller dendrites. Manual ground truth segmentations for all slices were meticulously annotated by materials scientists, ensuring high accuracy. This dataset presents a challenging task in materials science, as precise boundary delineation is critical for understanding dendrite formation and growth. It can be downloaded from [Al-La MicroData](https://pan.baidu.com/s/1rdM9Xj2mx9MinIj83ecnUw?pwd=3s57).
-3. *Added detailed ablation studies*: We supplemented the ablation experiments for Skeaw, conducting extensive ablation studies across five diverse datasets. These experiments provide a more comprehensive analysis of the method's performance and robustness.
-4. *Included additional baseline comparisons*: We introduced comparisons with additional baseline methods, such as ARS, to further validate the effectiveness of our approach.
-5. *Revised figures and tables for clarity*: All figures and tables have been updated and refined to improve readability and better illustrate the experimental results and key findings.
+## 🔑 Highlights of the Journal Version
+
+1. **Extended to new datasets and scenarios**  
+   - Adaptation to the **DRIVE** dataset, where the background typically forms a single connected object.  
+   - Application to a newly introduced **Al-La MicroData** dataset for aluminum–lanthanum dendrite microstructure segmentation (50 slices, 1024×1024 px each).  
+   - Dataset annotated by materials scientists and publicly released:  
+     👉 [Al-La MicroData Download](https://pan.baidu.com/s/1rdM9Xj2mx9MinIj83ecnUw?pwd=3s57)  
+
+2. **Detailed ablation studies**  
+   - Extensive experiments across five diverse datasets to assess robustness.  
+
+3. **Additional baseline comparisons**  
+   - Inclusion of methods such as **ARS** for fairer evaluation.  
+
+4. **Refined figures and tables**  
+   - Improved clarity and readability in visual presentation.  
+
 
 ## Abstract
 Topological consistency plays a crucial role in the task of boundary segmentation for reticular images, such as cell membrane segmentation in neuron electron microscopic images, grain boundary segmentation in material microscopic images and road segmentation in aerial images. In these fields, topological changes in segmentation results have a serious impact on the downstream tasks, which can even exceed the misalignment of the boundary itself. To enhance the topology accuracy in segmentation results, we propose the Skea-Topo Aware loss, which is a novel loss function that takes into account the shape of each object and topological significance of the pixels. It consists of two components. First, the skeleton-aware weighted loss improves the segmentation accuracy by better modeling the object geometry with skeletons. Second, a boundary rectified term effectively identifies and emphasizes topological critical pixels in the prediction errors using both foreground and background skeletons in the ground truth and predictions. Experiments prove that our method improves topological consistency by up to 7 points in VI compared to 13 state-of-art methods, based on objective and subjective assessments across three different boundary segmentation datasets.
@@ -77,6 +92,18 @@ If you find our work is useful in your research or applications, please consider
       doi       = {10.24963/ijcai.2024/121},
       url       = {https://doi.org/10.24963/ijcai.2024/121},
     }
+or
+    @article{LIU2026112265,
+        title = {Skea-Topo: A skeleton-aware loss function for topologically accurate boundary segmentation},
+        journal = {Pattern Recognition},
+        volume = {171},
+        pages = {112265},
+        year = {2026},
+        issn = {0031-3203},
+        doi = {https://doi.org/10.1016/j.patcog.2025.112265},
+        url = {https://www.sciencedirect.com/science/article/pii/S0031320325009264},
+        author = {Chuni Liu and Boyuan Ma and Yujie Xie and Xiaojuan Ban and Haiyou Huang and Hao Wang and Weihua Xue and Ke Xu},
+}
 
 
 
