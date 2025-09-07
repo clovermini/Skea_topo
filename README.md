@@ -93,6 +93,7 @@ If you find our work is useful in your research or applications, please consider
       url       = {https://doi.org/10.24963/ijcai.2024/121},
     }
 or
+
     @article{LIU2026112265,
         title = {Skea-Topo: A skeleton-aware loss function for topologically accurate boundary segmentation},
         journal = {Pattern Recognition},
@@ -103,7 +104,7 @@ or
         doi = {https://doi.org/10.1016/j.patcog.2025.112265},
         url = {https://www.sciencedirect.com/science/article/pii/S0031320325009264},
         author = {Chuni Liu and Boyuan Ma and Yujie Xie and Xiaojuan Ban and Haiyou Huang and Hao Wang and Weihua Xue and Ke Xu},
-}
+      }
 
 
 
